@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <title>Raythori - Connecting Farmers and Buyers Directly</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* FadeIn animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #22c55e;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: none;
+        }
+        .nav-links a {
+            color: #22c55e;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+        .sign-up-btn {
+            display: none;
+        }
+
+        /* Hero section styles */
+        .hero {
+            background-color: #f0fdf4;
+            padding: 4rem 0;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #15803d;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInText 1s 0.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #22c55e;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #22c55e;
+            color: #fff;
+        }
+        .btn-secondary {
+            background-color: #fff;
+            color: #22c55e;
+            border: 2px solid #22c55e;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+            transform: scale(1.1);
+        }
+
+        /* Features section styles */
+        .features {
+            padding: 4rem 0;
+            background-color: #fff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .features h2 {
+            font-size: 2rem;
+            color: #15803d;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #f0fdf4;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #22c55e;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            color: #15803d;
+            margin-bottom: 0.5rem;
+        }
+
+        /* How It Works section styles */
+        .how-it-works {
+            padding: 4rem 0;
+            background-color: #f0fdf4;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .how-it-works h2 {
+            font-size: 2rem;
+            color: #15803d;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .step {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 1s ease forwards;
+        }
+
+        .step:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+        .step:nth-child(2) {
+            animation-delay: 1s;
+        }
+        .step:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            color: #22c55e;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            color: #15803d;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials section styles */
+        .testimonials {
+            padding: 4rem 0;
+            background-color: #fff;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .testimonials h2 {
+            font-size: 2rem;
+            color: #15803d;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .testimonial {
+            background-color: #f0fdf4;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        /* Call to Action section styles */
+        .cta {
+            padding: 4rem 0;
+            background-color: #22c55e;
+            color: #fff;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #15803d;
+            color: #fff;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Responsive styles */
+        @media (min-width: 768px) {
+            .nav-links, .sign-up-btn {
+                display: block;
+            }
+            .cta-buttons {
+                flex-direction: row;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps {
+                flex-direction: row;
+            }
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Raythori</a>
+                <div class="nav-links">
+                    <a href="/Public/index.html">Home</a>
+                    <a href="/Public/sellers.html">Sellers</a>
+                    <a href="/Public/buyers.html">Products</a>
+                    <a href="/Public/contact.html">Contact</a>
+                </div>
+                <a href="signup.html" class="sign-up-btn btn btn-secondary">Sign Up</a>
+                <a href="login.html" class="sign-up-btn btn btn-secondary">Log in</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Connecting Farmers and Buyers Directly</h1>
+            <p>Eliminating middlemen to bring farmers closer to consumers.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon"><i class="fa fa-user-circle"></i></div>
+                    <h3>Direct Contact</h3>
+                    <p>Connect directly with farmers and buyers for better transparency and prices.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fa fa-truck"></i></div>
+                    <h3>Delivery Tracking</h3>
+                    <p>Track your deliveries in real-time with our efficient logistics system.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fa fa-lock"></i></div>
+                    <h3>Secure Payments</h3>
+                    <p>All transactions are secure, ensuring trust between farmers and buyers.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fa fa-chart-line"></i></div>
+                    <h3>Market Analytics</h3>
+                    <p>Get insights into market trends to make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon"><i class="fa fa-clipboard-check"></i></div>
+                    <h3>Step 1: Register</h3>
+                    <p>Sign up on our platform and create your profile as a farmer or buyer.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fa fa-search"></i></div>
+                    <h3>Step 2: Explore</h3>
+                    <p>Browse available products or find farmers offering fresh produce.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fa fa-handshake"></i></div>
+                    <h3>Step 3: Connect</h3>
+                    <p>Contact the seller or buyer directly and finalize the transaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"Raythori has made it so much easier to connect with local farmers. No more middlemen!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="User">
+                        <span>John Doe</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p>"The platform is user-friendly, and the payment system is smooth. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="User">
+                        <span>Jane Smith</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Start Connecting with Farmers Today!</h2>
+            <div class="cta-buttons">
+                <a href="/Public/signup.html" class="btn btn-primary">Join Now</a>
+                <a href="/Public/login.html" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="fab fa-facebook"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Raythori. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_TRACKING_ID');
+
+    document.addEventListener("DOMContentLoaded", function() {
+            // Navbar functionality for responsive design
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const signUpBtn = document.querySelector('.sign-up-btn');
+
+            // Toggle the visibility of navigation links on mobile
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('show');
+            });
+
+            // Show the Sign-Up button for small screens
+            signUpBtn.style.display = 'block';
+        });
+</script>
+
+
+
+
+    
+</body>
+</html>
