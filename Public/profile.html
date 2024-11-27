@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Profile Page CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #22c55e;
+            padding: 1rem;
+            color: #fff;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .profile-container h2 {
+            text-align: center;
+            color: #15803d;
+            margin-bottom: 2rem;
+        }
+
+        .profile-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-field label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-field input,
+        .profile-field textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .profile-field textarea {
+            height: 150px;
+        }
+
+        button {
+            background-color: #22c55e;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #15803d;
+        }
+
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+            background-color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index.html" class="logo">Raythori</a>
+            <a href="javascript:void(0)" class="logout-btn" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+    
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <form id="profile-form">
+            <div class="profile-field">
+                <label for="userName">Name:</label>
+                <input type="text" id="userName" placeholder="Enter your name" required>
+            </div>
+            <div class="profile-field">
+                <label for="userEmail">Email:</label>
+                <input type="email" id="userEmail" disabled placeholder="Your email" required>
+            </div>
+            <div class="profile-field">
+                <label for="userBio">Bio:</label>
+                <textarea id="userBio" placeholder="Tell us something about yourself"></textarea>
+            </div>
+            <button type="button" onclick="updateUserProfile()">Update Profile</button>
+        </form>
+    </div>
+
+    <script type="module">
+        // Firebase Setup
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+        import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+        // Your Firebase Config (replace with your own)
+        const firebaseConfig = {
+  apiKey: "AIzaSyD2niq-vHFMT8fkEyy0bvC8LMhXIWGb7qs",
+  authDomain: "mini-project-d692a.firebaseapp.com",
+  projectId: "mini-project-d692a",
+  storageBucket: "mini-project-d692a.firebasestorage.app",
+  messagingSenderId: "871464611233",
+  appId: "1:871464611233:web:557ad9fd875ab45ee7afe0",
+  measurementId: "G-61QSKZR0Z2"
+};
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Listen for auth state changes (login/logout)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("User logged in:", user);
+                loadUserProfile(user);
+            } else {
+                console.log("No user logged in");
+                window.location.href = "/Public/login.html";
+            }
+        });
+
+        // Function to load the user profile data
+        async function loadUserProfile(user) {
+            const userRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(userRef);
+            
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                document.getElementById('userName').value = userData.name;
+                document.getElementById('userEmail').value = user.email;
+                document.getElementById('userBio').value = userData.bio || '';
+            }
+        }
+
+        // Function to update user profile info
+        async function updateUserProfile() {
+            const user = auth.currentUser;
+            if (user) {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    name: document.getElementById('userName').value,
+                    bio: document.getElementById('userBio').value
+                });
+                alert("Profile updated successfully!");
+            }
+        }
+
+        // Function to log out the user
+        function logout() {
+            signOut(auth).then(() => {
+                window.location.href = "/Public/login.html";
+            }).catch((error) => {
+                console.error("Error signing out:", error);
+            });
+        }
+    </script>
+</body>
+</html>

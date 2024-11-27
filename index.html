@@ -25,6 +25,17 @@
             100% { opacity: 1; }
         }
 
+        .header-profile {
+    position: absolute;
+    right: 60px; /* Adjust the distance from the right edge */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px; /* Adjust the size of the icon */
+    color: #22c55e; /* Set the color of the icon */
+    cursor: pointer; /* Change the cursor to indicate it's clickable */
+}
+
+
         .container {
             width: 90%;
             max-width: 1200px;
@@ -38,6 +49,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 1rem 0;
             animation: slideDown 0.8s ease-out;
+            position: relative;
         }
 
         @keyframes slideDown {
@@ -64,7 +76,23 @@
             text-decoration: none;
             margin-left: 1rem;
         }
-        .sign-up-btn {
+
+        .header-icon {
+    position: absolute;
+    right: 20px; /* Adjust the distance from the right edge */
+    top: 50%; /* Align vertically in the middle */
+    transform: translateY(-50%); /* Center the icon vertically */
+    font-size: 24px; /* Adjust the icon size */
+    color: #fff; /* Set the icon color */
+    cursor: pointer; /* Change the cursor to indicate it's clickable */
+}
+
+.nav-links,
+.sign-up-btn,
+.log-in-btn {
+    display: inline-block;
+}
+        .sign-up-btn, .log-in-btn {
             display: none;
         }
 
@@ -329,20 +357,37 @@
 
         /* Responsive styles */
         @media (min-width: 768px) {
-            .nav-links, .sign-up-btn {
+            .nav-links, .sign-up-btn, .log-in-btn {
                 display: block;
             }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin-left: 1.5rem;
+            }
+
             .cta-buttons {
                 flex-direction: row;
             }
+
+            .btn {
+                margin-right: 1rem;
+            }
+
             .feature-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
-            .steps {
-                flex-direction: row;
-            }
+
             .testimonial-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                flex-direction: row;
+                justify-content: space-around;
             }
         }
     </style>
@@ -353,95 +398,111 @@
             <nav>
                 <a href="#" class="logo">Raythori</a>
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="Public/sellers.html">Sellers</a>
-                    <a href="Public/buyers.html">Products</a>
-                    <a href="Public/contact.html">Contact</a>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#testimonials">Testimonials</a>
                 </div>
-                <a href="Public/signup.html" class="sign-up-btn btn btn-secondary">Sign Up</a>
-                <a href="Public/login.html" class="sign-up-btn btn btn-secondary">Log in</a>
+                <div class="sign-up-btn">
+                    <a href="/Public/signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+                <div class="log-in-btn">
+                    <a href="/Public/login.html" class="btn btn-secondary">Log In</a>
+                </div>
+    
+    
+                <!-- Profile Icon -->
+                <div class="header-profile">
+                    <i class="fas fa-user-circle"></i> <!-- Profile icon -->
+                </div>
+
+                <a href="/Public/profile.html" class="header-profile">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+    
             </nav>
         </div>
     </header>
-
+    
     <section class="hero">
         <div class="container">
             <h1>Connecting Farmers and Buyers Directly</h1>
-            <p>Eliminating middlemen to bring farmers closer to consumers.</p>
+            <p>Raythori is an innovative platform that eliminates middlemen and enables direct transactions between farmers and buyers.</p>
             <div class="cta-buttons">
                 <a href="/Public/signup.html" class="btn btn-primary">Get Started</a>
-                <a href="index.html" class="btn btn-secondary">Learn More</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
 
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
-            <h2>Features</h2>
+            <h2>Our Features</h2>
             <div class="feature-grid">
                 <div class="feature">
-                    <div class="feature-icon"><i class="fa fa-user-circle"></i></div>
-                    <h3>Direct Contact</h3>
-                    <p>Connect directly with farmers and buyers for better transparency and prices.</p>
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Direct Connection</h3>
+                    <p>Farmers and buyers can interact without any intermediaries.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><i class="fa fa-truck"></i></div>
-                    <h3>Delivery Tracking</h3>
-                    <p>Track your deliveries in real-time with our efficient logistics system.</p>
+                    <div class="feature-icon"><i class="fas fa-tractor"></i></div>
+                    <h3>Efficient Transactions</h3>
+                    <p>Streamlined processes for buying and selling agricultural products.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon"><i class="fa fa-lock"></i></div>
-                    <h3>Secure Payments</h3>
-                    <p>All transactions are secure, ensuring trust between farmers and buyers.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon"><i class="fa fa-chart-line"></i></div>
-                    <h3>Market Analytics</h3>
-                    <p>Get insights into market trends to make informed decisions.</p>
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Market Insights</h3>
+                    <p>Farmers and buyers get valuable market data to make informed decisions.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="how-it-works">
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h2>How It Works</h2>
             <div class="steps">
                 <div class="step">
-                    <div class="step-icon"><i class="fa fa-clipboard-check"></i></div>
-                    <h3>Step 1: Register</h3>
-                    <p>Sign up on our platform and create your profile as a farmer or buyer.</p>
+                    <div class="step-icon"><i class="fas fa-sign-in-alt"></i></div>
+                    <h3>Sign Up</h3>
+                    <p>Create your account and complete your profile.</p>
                 </div>
                 <div class="step">
-                    <div class="step-icon"><i class="fa fa-search"></i></div>
-                    <h3>Step 2: Explore</h3>
-                    <p>Browse available products or find farmers offering fresh produce.</p>
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h3>Browse Listings</h3>
+                    <p>Explore available products and find buyers or sellers.</p>
                 </div>
                 <div class="step">
-                    <div class="step-icon"><i class="fa fa-handshake"></i></div>
-                    <h3>Step 3: Connect</h3>
-                    <p>Contact the seller or buyer directly and finalize the transaction.</p>
+                    <div class="step-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Close the Deal</h3>
+                    <p>Finalize the transaction directly with your chosen counterpart.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section class="testimonials" id="testimonials">
         <div class="container">
             <h2>What Our Users Say</h2>
             <div class="testimonial-grid">
                 <div class="testimonial">
-                    <p>"Raythori has made it so much easier to connect with local farmers. No more middlemen!"</p>
+                    <p>"Raythori has been a game-changer for my farm. The platform connects me with buyers directly, increasing my profits."</p>
                     <div class="testimonial-author">
                         <img src="https://via.placeholder.com/50" alt="User">
-                        <span>John Doe</span>
+                        <div>
+                            <strong>John Doe</strong>
+                            <p>Farmer</p>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial">
-                    <p>"The platform is user-friendly, and the payment system is smooth. Highly recommend!"</p>
+                    <p>"As a buyer, Raythori has allowed me to find fresh produce directly from farmers. The process is quick and transparent!"</p>
                     <div class="testimonial-author">
                         <img src="https://via.placeholder.com/50" alt="User">
-                        <span>Jane Smith</span>
+                        <div>
+                            <strong>Jane Smith</strong>
+                            <p>Buyer</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -452,8 +513,8 @@
         <div class="container">
             <h2>Start Connecting with Farmers Today!</h2>
             <div class="cta-buttons">
-                <a href="/Public/signup.html" class="btn btn-primary">Join Now</a>
-                <a href="/Public/contact.html" class="btn btn-secondary">Contact Us</a>
+                <a href="Public/signup.html" class="btn btn-primary">Join Now</a>
+                <a href="Public/contact.html" class="btn btn-secondary">Contact Us</a>
             </div>
         </div>
     </section>
@@ -461,9 +522,8 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Support</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </div>
             <div class="social-icons">
                 <a href="#" class="fab fa-facebook"></a>
@@ -475,34 +535,5 @@
             </div>
         </div>
     </footer>
-
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'YOUR_TRACKING_ID');
-
-    document.addEventListener("DOMContentLoaded", function() {
-            // Navbar functionality for responsive design
-            const navLinks = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const signUpBtn = document.querySelector('.sign-up-btn');
-
-            // Toggle the visibility of navigation links on mobile
-            menuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('show');
-            });
-
-            // Show the Sign-Up button for small screens
-            signUpBtn.style.display = 'block';
-        });
-</script>
-
-
-
-
-    
 </body>
 </html>
