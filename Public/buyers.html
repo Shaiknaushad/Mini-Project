@@ -3,249 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buyer Page - Agricultural Marketplace</title>
+    <title>Buyers - Agricultural Marketplace</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
+        /* Basic Styling */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #f4f4f9, #e8f5e9);
+            background-color: #f0fdf4;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         header {
-            background-color: #4CAF50;
-            padding: 10px;
+            background-color: #22c55e;
+            color: white;
+            padding: 20px 0;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .navbar a {
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
-            font-size: 18px;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: color 0.3s ease;
         }
 
         .navbar a:hover {
-            background-color: #3e8e41;
-            border-radius: 5px;
-            transform: translateY(-3px);
+            color: #15803d;
         }
 
-        section {
+        .container {
             padding: 20px;
-            margin: 20px;
-            background-color: white;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease-out;
         }
 
-        h2 {
-            text-align: center;
-            color: #4CAF50;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
         }
 
         h3 {
-            color: #333;
-            margin-bottom: 15px;
+            color: #22c55e;
+            margin-bottom: 20px;
         }
 
-        input, select, button {
-            margin: 10px 0;
-            padding: 10px;
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: box-shadow 0.3s;
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        input:focus, select:focus {
-            box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
-            outline: none;
+        .product-item {
+            background-color: #f0fdf4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
         }
 
-        button {
-            background-color: #4CAF50;
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        .product-item h4 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .product-item p {
+            margin-bottom: 10px;
+        }
+
+        .product-item span {
+            font-weight: bold;
+        }
+
+        .product-item button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
             color: white;
             border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
             cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #45a049;
-            transform: translateY(-3px);
-        }
-
-        button:active {
-            transform: translateY(1px);
-        }
-
-        .product {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            background-color: #f9f9f9;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .order-history {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fdfdfd;
-        }
-
-        .tracking {
-            font-size: 14px;
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .product-item button:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar">
+            <a href="sellers.html">Seller</a>
             <a href="../home.html">Home</a>
-            <a href="sellers.html">Seller Dashboard</a>
-            <a href="contact.html">Contact</a>
+            <a href="buyfeatures.html">Features</a>
         </div>
+        <h2>Buyer's Marketplace</h2>
     </header>
 
-    <!-- Search and Filter Products -->
-    <section id="search-products">
-        <h2>Search and Filter Products</h2>
-        <form id="filter-form">
-            <input type="text" id="search-keyword" placeholder="Search by Product Name">
-            <label for="filter-type">Filter by Type:</label>
-            <select id="filter-type">
-                <option value="">Select Type</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Grains">Grains</option>
-            </select>
-            <label for="filter-price">Filter by Price Range:</label>
-            <input type="number" id="filter-price-min" placeholder="Min Price">
-            <input type="number" id="filter-price-max" placeholder="Max Price">
-            <button type="submit">Search</button>
-        </form>
+    <div class="container">
         <h3>Available Products</h3>
-        <div id="product-list"></div>
-    </section>
-
-    <!-- Buy Products Directly -->
-    <section id="buy-products">
-        <h2>Buy Products Directly</h2>
-        <p>Select a product and contact the farmer directly to negotiate and purchase.</p>
-        <p id="selected-product"></p>
-    </section>
-
-    <!-- Order History & Tracking -->
-    <section id="order-history">
-        <h2>Order History & Tracking</h2>
-        <h3>Your Orders</h3>
-        <div id="order-list">
-            <div class="order-history">
-                <span>Order ID: 101</span>
-                <span>Tomatoes - 10kg</span>
-                <span class="tracking">In Transit</span>
-            </div>
-            <div class="order-history">
-                <span>Order ID: 102</span>
-                <span>Apples - 5kg</span>
-                <span class="tracking">Delivered</span>
-            </div>
+        <div class="product-list" id="product-list">
+            <!-- Products will be dynamically inserted here -->
         </div>
-    </section>
-
-    <!-- Secure Payment Gateway -->
-    <section id="payment-gateway">
-        <h2>Secure Payment Gateway</h2>
-        <p>Proceed to make payments securely.</p>
-        <button onclick="processPayment()">Proceed to Payment</button>
-    </section>
+    </div>
 
     <script>
-        const products = [
-            { name: "Tomatoes", type: "Vegetables", price: 30, location: "Karnataka" },
-            { name: "Apples", type: "Fruits", price: 120, location: "Himachal Pradesh" },
-            { name: "Rice", type: "Grains", price: 60, location: "Andhra Pradesh" }
-        ];
-
-        const productList = document.getElementById("product-list");
-
-        function displayProducts(filteredProducts) {
-            productList.innerHTML = "";
-            filteredProducts.forEach(product => {
-                const productDiv = document.createElement("div");
-                productDiv.className = "product";
-                productDiv.innerHTML = `
-                    <span>${product.name} - ₹${product.price} per unit</span>
-                    <button onclick="buyProduct('${product.name}')">Buy</button>
-                `;
-                productList.appendChild(productDiv);
-            });
-        }
-
-        displayProducts(products);
-
-        document.getElementById("filter-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const keyword = document.getElementById("search-keyword").value.toLowerCase();
-            const type = document.getElementById("filter-type").value;
-            const priceMin = document.getElementById("filter-price-min").value;
-            const priceMax = document.getElementById("filter-price-max").value;
-
-            const filteredProducts = products.filter(product => {
-                return (
-                    (keyword ? product.name.toLowerCase().includes(keyword) : true) &&
-                    (type ? product.type === type : true) &&
-                    (priceMin ? product.price >= priceMin : true) &&
-                    (priceMax ? product.price <= priceMax : true)
-                );
-            });
-
-            displayProducts(filteredProducts);
+        // Retrieve products from localStorage and display them
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
         });
 
-        function buyProduct(productName) {
-            const selectedProduct = products.find(product => product.name === productName);
-            document.getElementById("selected-product").innerText = `You selected ${selectedProduct.name}. Contact farmer to purchase.`;
+        // Display products from localStorage
+        function displayProducts() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            products.forEach((product, index) => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <button onclick="removeProduct(${index})">Remove</button>
+                    <h4>${product.name}</h4>
+                    <p><span>Description:</span> ${product.description}</p>
+                    <p><span>Quantity:</span> ${product.quantity}</p>
+                    <p><span>Price:</span> ₹${product.price}</p>
+                    <p><span>State:</span> ${product.state}</p>
+                    <p><span>District:</span> ${product.district}</p>
+                `;
+                productList.appendChild(productItem);
+            });
         }
 
-        function processPayment() {
-            alert("Redirecting to secure payment gateway...");
+        // Remove product from localStorage
+        function removeProduct(index) {
+            let products = JSON.parse(localStorage.getItem('products')) || [];
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
         }
     </script>
 </body>

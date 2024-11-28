@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Agricultural Marketplace</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0fdf4;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        header {
+            background-color: #22c55e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #15803d;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        h2 {
+            color: #22c55e;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f0fdf4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feature h3 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            margin-bottom: 10px;
+        }
+
+        .feature ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .feature ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="sellers.html">Seller</a>
+            <a href="buyers.html">Buyer</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <h2>Features for Sellers</h2>
+    </header>
+
+    <div class="container">
+        <div class="feature">
+            <h3>Create and Manage Product Listings</h3>
+            <p>Sellers can list and manage their products, including setting prices, adding descriptions, and uploading images.</p>
+            <ul>
+                <li>Add new products with detailed descriptions.</li>
+                <li>Set prices and manage inventory.</li>
+                <li>Upload high-quality images to showcase products.</li>
+                <li>Edit or remove product listings as needed.</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>Order Management</h3>
+            <p>Track and manage incoming orders, accept or reject them, and monitor order status.</p>
+            <ul>
+                <li>View and manage all incoming orders.</li>
+                <li>Accept or reject orders based on availability.</li>
+                <li>Monitor the status of orders from placement to delivery.</li>
+                <li>Communicate with buyers regarding order details.</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>Sales Analytics</h3>
+            <p>Gain insights into sales performance, top-selling products, and revenue trends to optimize business strategies.</p>
+            <ul>
+                <li>Track sales performance over time.</li>
+                <li>Identify top-selling products and categories.</li>
+                <li>Analyze revenue trends and customer behavior.</li>
+                <li>Make data-driven decisions to improve sales strategies.</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>Payment Management</h3>
+            <p>Secure payment handling for sellers, enabling them to track earnings and manage withdrawals.</p>
+            <ul>
+                <li>Track all earnings from product sales.</li>
+                <li>Manage withdrawals and payments securely.</li>
+                <li>View detailed transaction history.</li>
+                <li>Ensure secure and timely payment processing.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

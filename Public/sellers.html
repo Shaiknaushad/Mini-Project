@@ -3,309 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seller Page - Agricultural Marketplace</title>
+    <title>Sellers - Agricultural Marketplace</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
+        /* Basic Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f8ff;
+            background-color: #f0fdf4;
             color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         header {
-            background: linear-gradient(90deg, #4CAF50, #3e8e41);
-            padding: 15px;
-            text-align: center;
+            background-color: #22c55e;
             color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .navbar a {
             color: white;
-            padding: 10px 20px;
             text-decoration: none;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .navbar a:hover {
-            background-color: #2f8f34;
-            border-radius: 5px;
-            transform: scale(1.1);
+            color: #15803d;
         }
 
-        section {
+        .container {
             padding: 20px;
+            max-width: 600px;
             margin: 20px auto;
-            max-width: 800px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.2s;
-        }
-
-        section:hover {
-            transform: scale(1.02);
-        }
-
-        h2, h3 {
-            color: #4CAF50;
-        }
-
-        input, textarea, select, button {
-            margin: 10px 0;
-            padding: 10px;
-            width: calc(100% - 20px);
-            border: 1px solid #ddd;
+            background-color: #fff;
             border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: slideUp 1s ease-out;
         }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        h3 {
+            color: #22c55e;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #22c55e;
         }
 
         button {
-            background-color: #4CAF50;
+            padding: 10px 20px;
+            background-color: #22c55e;
             color: white;
-            font-size: 16px;
             border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.3s ease;
         }
 
         button:hover {
-            background-color: #45a049;
+            opacity: 0.9;
             transform: scale(1.05);
         }
 
-        #order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        #order-table th, #order-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        #order-table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .metric {
-            background-color: #e8f5e9;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 45%;
-            margin: 10px auto;
-        }
-
-        .metric:hover {
-            background-color: #d7ffd9;
-        }
-
-        .metric h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        #calculated-price {
-            color: #2e7d32;
+        .success-message {
+            margin-top: 20px;
+            color: #22c55e;
             font-weight: bold;
-            margin-top: 10px;
+            animation: fadeInText 1s ease forwards;
         }
 
-        @media (max-width: 768px) {
-            #analytics-dashboard {
-                flex-direction: column;
-                align-items: center;
-            }
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
-            .metric {
-                width: 80%;
-            }
+        .product-list {
+            margin-top: 20px;
+        }
+
+        .product-item {
+            background-color: #f0fdf4;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-item button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-item button:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar">
-            <a href="../home.html">Home</a>
             <a href="buyers.html">Buyer</a>
-            <a href="contact.html">Contact</a>
+            <a href="../home.html">Home</a>
+            <a href="sellfeatures.html">Features</a>
         </div>
+        <h2>Seller's Product Upload</h2>
     </header>
 
-    <!-- List Products Section -->
-    <section id="list-products">
-        <h2>List Your Products for Sale</h2>
-        <form id="product-form">
-            <input type="text" id="product-name" placeholder="Product Name" required>
-            <textarea id="product-description" placeholder="Product Description" required></textarea>
-            <input type="number" id="product-quantity" placeholder="Quantity Available" required>
-            <input type="number" id="product-price" placeholder="Price per Unit" required>
-            <label for="state">Select State:</label>
-            <select id="state" name="state" required>
-                <option value="">Select a State</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Karnataka">Karnataka</option>
-            </select>
-            <label for="district">Select District:</label>
-            <select id="district" name="district" required>
-                <option value="">Select a District</option>
-            </select>
-            <button type="submit">List Product</button>
+    <div class="container">
+        <h3>Add New Product</h3>
+        <form id="productForm">
+            <label for="product-name">Product Name:</label>
+            <input type="text" id="product-name" required>
+
+            <label for="product-description">Description:</label>
+            <textarea id="product-description" required></textarea>
+
+            <label for="product-quantity">Quantity:</label>
+            <input type="number" id="product-quantity" required>
+
+            <label for="product-price">Price (₹):</label>
+            <input type="number" id="product-price" required>
+
+            <label for="product-state">State:</label>
+            <input type="text" id="product-state" required>
+
+            <label for="product-district">District:</label>
+            <input type="text" id="product-district" required>
+
+            <button type="submit">Add Product</button>
         </form>
-        <h3>Your Listed Products</h3>
-        <ul id="product-list"></ul>
-    </section>
+        <div class="success-message" id="success-message" style="display: none;">Product added successfully!</div>
 
-    <!-- Price Calculation Tool -->
-    <section id="price-calculator">
-        <h2>Price Calculation Tool</h2>
-        <label for="production-cost">Enter Production Cost:</label>
-        <input type="number" id="production-cost" placeholder="Production Cost">
-        <label for="profit-margin">Enter Desired Profit Margin (%):</label>
-        <input type="number" id="profit-margin" placeholder="Profit Margin">
-        <button id="calculate-price">Calculate Price</button>
-        <p id="calculated-price"></p>
-    </section>
-
-    <!-- Order Management -->
-    <section id="order-management">
-        <h2>Order Management</h2>
-        <h3>Pending Orders</h3>
-        <table id="order-table">
-            <tr>
-                <th>Order ID</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </table>
-    </section>
-
-    <!-- Sales Analytics -->
-    <section id="sales-analytics">
-        <h2>Sales Analytics</h2>
-        <div id="analytics-dashboard">
-            <div class="metric">
-                <h3>Total Sales</h3>
-                <p id="total-sales">0</p>
-            </div>
-            <div class="metric">
-                <h3>Product Performance</h3>
-                <p id="product-performance">Coming Soon...</p>
-            </div>
+        <h3>Your Products</h3>
+        <div class="product-list" id="product-list">
+            <!-- Products will be dynamically inserted here -->
         </div>
-    </section>
+    </div>
 
     <script>
-        // Add Product to the list
-        document.getElementById('product-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Add product to localStorage (simulating backend for this example)
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
             const productName = document.getElementById('product-name').value;
             const productDescription = document.getElementById('product-description').value;
             const productQuantity = document.getElementById('product-quantity').value;
             const productPrice = document.getElementById('product-price').value;
+            const productState = document.getElementById('product-state').value;
+            const productDistrict = document.getElementById('product-district').value;
 
+            const newProduct = {
+                name: productName,
+                description: productDescription,
+                quantity: productQuantity,
+                price: productPrice,
+                state: productState,
+                district: productDistrict
+            };
+
+            let products = JSON.parse(localStorage.getItem('products')) || [];
+            products.push(newProduct);
+            localStorage.setItem('products', JSON.stringify(products));
+
+            // Reset form after submission
+            document.getElementById('productForm').reset();
+
+            // Show success message
+            const successMessage = document.getElementById("success-message");
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Update product list
+            displayProducts();
+        });
+
+        // Display products from localStorage
+        function displayProducts() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
             const productList = document.getElementById('product-list');
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `${productName} - ${productQuantity} units - ₹${productPrice} each`;
-            productList.appendChild(listItem);
+            productList.innerHTML = '';
 
-            // Reset the form
-            document.getElementById('product-form').reset();
-        });
-
-        // Price Calculation Tool
-        document.getElementById('calculate-price').addEventListener('click', function() {
-            const productionCost = parseFloat(document.getElementById('production-cost').value);
-            const profitMargin = parseFloat(document.getElementById('profit-margin').value);
-
-            if (!isNaN(productionCost) && !isNaN(profitMargin)) {
-                const sellingPrice = productionCost + (productionCost * profitMargin / 100);
-                document.getElementById('calculated-price').innerText = `Suggested Price: ₹${sellingPrice.toFixed(2)}`;
-            } else {
-                document.getElementById('calculated-price').innerText = 'Please enter valid values for both cost and profit margin.';
-            }
-        });
-
-        // Order Management (Simulating with hardcoded data)
-        const orders = [
-            { id: 1, product: 'Tomatoes', quantity: 50, status: 'Pending' },
-            { id: 2, product: 'Potatoes', quantity: 30, status: 'Accepted' },
-            { id: 3, product: 'Carrots', quantity: 20, status: 'Pending' }
-        ];
-
-        const orderTable = document.getElementById('order-table');
-        orders.forEach(order => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${order.id}</td>
-                <td>${order.product}</td>
-                <td>${order.quantity}</td>
-                <td>${order.status}</td>
-                <td class="order-actions"><button class="accept-btn">Accept</button><button class="reject-btn">Reject</button></td>
-            `;
-            orderTable.appendChild(row);
-        });
-
-        // Handling Accept/Reject actions for orders
-        document.querySelectorAll('.accept-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.parentElement.parentElement;
-                row.cells[3].innerText = 'Accepted';
-                this.setAttribute('disabled', 'true');
-                this.nextElementSibling.setAttribute('disabled', 'true');
+            products.forEach((product, index) => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <div>
+                        <h4>${product.name}</h4>
+                        <p>${product.description}</p>
+                        <p>Quantity: ${product.quantity}</p>
+                        <p>Price: ₹${product.price}</p>
+                        <p>State: ${product.state}</p>
+                        <p>District: ${product.district}</p>
+                    </div>
+                    <button onclick="removeProduct(${index})">Remove</button>
+                `;
+                productList.appendChild(productItem);
             });
-        });
+        }
 
-        document.querySelectorAll('.reject-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const row = this.parentElement.parentElement;
-                row.cells[3].innerText = 'Rejected';
-                this.setAttribute('disabled', 'true');
-                this.previousElementSibling.setAttribute('disabled', 'true');
-            });
-        });
+        // Remove product from localStorage
+        function removeProduct(index) {
+            let products = JSON.parse(localStorage.getItem('products')) || [];
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
+        }
 
-        // Dynamically load districts based on the selected state
-        const stateSelect = document.getElementById('state');
-        const districtSelect = document.getElementById('district');
-
-        const stateDistricts = {
-            'Andhra Pradesh': ['Anantapur', 'Chittoor', 'Kurnool'],
-            'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai'],
-            'Karnataka': ['Bengaluru', 'Mysuru', 'Hubli']
-        };
-
-        stateSelect.addEventListener('change', function() {
-            const selectedState = stateSelect.value;
-            districtSelect.innerHTML = '<option value="">Select a District</option>';
-            if (stateDistricts[selectedState]) {
-                stateDistricts[selectedState].forEach(district => {
-                    const option = document.createElement('option');
-                    option.value = district;
-                    option.textContent = district;
-                    districtSelect.appendChild(option);
-                });
-            }
-        });
+        // Initial display of products
+        displayProducts();
     </script>
 </body>
 </html>
