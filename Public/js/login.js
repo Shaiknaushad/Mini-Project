@@ -36,7 +36,7 @@ loginForm.addEventListener('submit', (e) => {
             alert('Successfully logged in!');
             
             // Redirect to homepage or dashboard after successful login
-            window.location.href = '/index.html';  // Modify according to your homepage URL
+            window.location.href = '../home.html';  // Modify according to your homepage URL
         })
         .catch((error) => {
             // Show error message in case of login failure
