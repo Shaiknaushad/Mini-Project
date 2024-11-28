@@ -72,7 +72,7 @@
             margin-bottom: 20px;
         }
 
-        .feature {
+        .section {
             margin-bottom: 20px;
             padding: 20px;
             background-color: #f0fdf4;
@@ -80,22 +80,91 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .feature h3 {
+        .section h3 {
             color: #22c55e;
             margin-bottom: 10px;
         }
 
-        .feature p {
+        .section p {
             margin-bottom: 10px;
         }
 
-        .feature ul {
+        .section ul {
             list-style-type: disc;
             margin-left: 20px;
         }
 
-        .feature ul li {
+        .section ul li {
             margin-bottom: 5px;
+        }
+
+        .price-calculator, .order-list, .sales-analytics, .payment-management {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .price-calculator input, .price-calculator button {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .price-calculator input:focus {
+            border-color: #22c55e;
+        }
+
+        .price-calculator button {
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .price-calculator button:hover {
+            background-color: #15803d;
+        }
+
+        .order-item, .analytics-item, .payment-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .order-item:hover, .analytics-item:hover, .payment-item:hover {
+            transform: scale(1.05);
+        }
+
+        .order-item h4, .analytics-item h4, .payment-item h4 {
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .order-item p, .analytics-item p, .payment-item p {
+            margin-bottom: 10px;
+        }
+
+        .order-item span, .analytics-item span, .payment-item span {
+            font-weight: bold;
+        }
+
+        .order-item button, .analytics-item button, .payment-item button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-item button:hover, .analytics-item button:hover, .payment-item button:hover {
+            background-color: #c0392b;
         }
     </style>
 </head>
@@ -110,49 +179,125 @@
     </header>
 
     <div class="container">
-        <div class="feature">
-            <h3>Create and Manage Product Listings</h3>
-            <p>Sellers can list and manage their products, including setting prices, adding descriptions, and uploading images.</p>
-            <ul>
-                <li>Add new products with detailed descriptions.</li>
-                <li>Set prices and manage inventory.</li>
-                <li>Upload high-quality images to showcase products.</li>
-                <li>Edit or remove product listings as needed.</li>
-            </ul>
-        </div>
+        <section id="price-calculator" class="section">
+            <h3>Price Calculation Tool</h3>
+            <label for="production-cost">Enter Production Cost:</label>
+            <input type="number" id="production-cost" placeholder="Production Cost" required>
+            <label for="profit-margin">Enter Desired Profit Margin (%):</label>
+            <input type="number" id="profit-margin" placeholder="Profit Margin" required>
+            <button id="calculate-price">Calculate Price</button>
+            <p id="calculated-price"></p>
+        </section>
 
-        <div class="feature">
+        <div class="section">
             <h3>Order Management</h3>
-            <p>Track and manage incoming orders, accept or reject them, and monitor order status.</p>
-            <ul>
-                <li>View and manage all incoming orders.</li>
-                <li>Accept or reject orders based on availability.</li>
-                <li>Monitor the status of orders from placement to delivery.</li>
-                <li>Communicate with buyers regarding order details.</li>
-            </ul>
+            <div class="order-list" id="order-list">
+                <!-- Orders will be dynamically inserted here -->
+            </div>
         </div>
 
-        <div class="feature">
+        <div class="section">
             <h3>Sales Analytics</h3>
-            <p>Gain insights into sales performance, top-selling products, and revenue trends to optimize business strategies.</p>
-            <ul>
-                <li>Track sales performance over time.</li>
-                <li>Identify top-selling products and categories.</li>
-                <li>Analyze revenue trends and customer behavior.</li>
-                <li>Make data-driven decisions to improve sales strategies.</li>
-            </ul>
+            <div class="sales-analytics" id="sales-analytics">
+                <!-- Sales analytics will be dynamically inserted here -->
+            </div>
         </div>
 
-        <div class="feature">
+        <div class="section">
             <h3>Payment Management</h3>
-            <p>Secure payment handling for sellers, enabling them to track earnings and manage withdrawals.</p>
-            <ul>
-                <li>Track all earnings from product sales.</li>
-                <li>Manage withdrawals and payments securely.</li>
-                <li>View detailed transaction history.</li>
-                <li>Ensure secure and timely payment processing.</li>
-            </ul>
+            <div class="payment-management" id="payment-management">
+                <!-- Payment management will be dynamically inserted here -->
+            </div>
         </div>
     </div>
+
+    <script>
+        // Price Calculation Tool
+        document.getElementById('calculate-price').addEventListener('click', function() {
+            const productionCost = parseFloat(document.getElementById('production-cost').value);
+            const profitMargin = parseFloat(document.getElementById('profit-margin').value);
+
+            if (isNaN(productionCost) || isNaN(profitMargin)) {
+                document.getElementById('calculated-price').textContent = 'Please enter valid numbers.';
+                return;
+            }
+
+            const calculatedPrice = productionCost + (productionCost * (profitMargin / 100));
+            document.getElementById('calculated-price').textContent = `Calculated Price: ₹${calculatedPrice.toFixed(2)}`;
+        });
+
+        // Order Management (simulated)
+        function displayOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+
+            orders.forEach((order, index) => {
+                const orderItem = document.createElement('div');
+                orderItem.classList.add('order-item');
+                orderItem.innerHTML = `
+                    <div>
+                        <h4>Order ${index + 1}</h4>
+                        <p>Product: ${order.productName}</p>
+                        <p>Quantity: ${order.quantity}</p>
+                        <p>Status: ${order.status}</p>
+                    </div>
+                    <button onclick="updateOrderStatus(${index}, 'Accepted')">Accept</button>
+                    <button onclick="updateOrderStatus(${index}, 'Rejected')">Reject</button>
+                `;
+                orderList.appendChild(orderItem);
+            });
+        }
+
+        function updateOrderStatus(index, status) {
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders[index].status = status;
+            localStorage.setItem('orders', JSON.stringify(orders));
+            displayOrders();
+        }
+
+        // Initial display of orders
+        displayOrders();
+
+        // Sales Analytics (simulated)
+        function displaySalesAnalytics() {
+            const salesAnalytics = document.getElementById('sales-analytics');
+            salesAnalytics.innerHTML = `
+                <div class="analytics-item">
+                    <h4>Top Selling Products</h4>
+                    <p>Product A: 100 units sold</p>
+                    <p>Product B: 80 units sold</p>
+                </div>
+                <div class="analytics-item">
+                    <h4>Revenue Trends</h4>
+                    <p>January: ₹50,000</p>
+                    <p>February: ₹60,000</p>
+                </div>
+            `;
+        }
+
+        // Initial display of sales analytics
+        displaySalesAnalytics();
+
+        // Payment Management (simulated)
+        function displayPaymentManagement() {
+            const paymentManagement = document.getElementById('payment-management');
+            paymentManagement.innerHTML = `
+                <div class="payment-item">
+                    <h4>Earnings</h4>
+                    <p>Total Earnings: ₹1,00,000</p>
+                    <p>Pending Withdrawals: ₹20,000</p>
+                </div>
+                <div class="payment-item">
+                    <h4>Transaction History</h4>
+                    <p>January: ₹50,000</p>
+                    <p>February: ₹60,000</p>
+                </div>
+            `;
+        }
+
+        // Initial display of payment management
+        displayPaymentManagement();
+    </script>
 </body>
 </html>
